@@ -1,0 +1,15 @@
+project:
+  name: customer-churn-decision-intelligence
+  dataset: IBM Telco Customer Churn
+
+paths:
+  raw_data: data/raw
+  interim_data: data/interim
+  processed_data: data/processed
+  artifacts: artifacts
+  reports: reports
+
+runtime:
+  random_seed: 42
+  log_level: INFO
+

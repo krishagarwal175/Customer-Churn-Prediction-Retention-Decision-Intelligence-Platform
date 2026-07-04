@@ -1,0 +1,10 @@
+models:
+  baseline:
+    name: logistic_regression
+  production_candidate:
+    name: xgboost_classifier
+
+evaluation:
+  primary_metric: recall_at_precision_floor
+  precision_floor: 0.45
+

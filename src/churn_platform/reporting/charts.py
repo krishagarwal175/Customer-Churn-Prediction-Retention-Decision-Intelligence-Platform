@@ -1,0 +1,2 @@
+"""Reusable chart placeholder."""
+

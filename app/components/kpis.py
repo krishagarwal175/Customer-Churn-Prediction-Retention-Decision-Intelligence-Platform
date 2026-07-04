@@ -1,0 +1,2 @@
+"""Dashboard KPI component placeholder."""
+

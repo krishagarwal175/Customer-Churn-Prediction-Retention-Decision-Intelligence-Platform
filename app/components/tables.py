@@ -1,0 +1,2 @@
+"""Dashboard table component placeholder."""
+

@@ -1,0 +1,5 @@
+dashboard:
+  title: Customer Churn Decision Intelligence
+  default_threshold: 0.5
+  default_time_horizon_months: 12
+

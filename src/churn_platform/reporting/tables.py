@@ -1,0 +1,2 @@
+"""Reusable table placeholder."""
+

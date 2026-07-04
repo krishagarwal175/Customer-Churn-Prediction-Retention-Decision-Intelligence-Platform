@@ -1,0 +1,2 @@
+"""Revenue simulator page placeholder."""
+

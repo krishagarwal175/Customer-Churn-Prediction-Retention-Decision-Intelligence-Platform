@@ -1,0 +1,2 @@
+"""Dashboard filter component placeholder."""
+

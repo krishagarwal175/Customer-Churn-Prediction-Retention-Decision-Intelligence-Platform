@@ -1,0 +1,2 @@
+"""Dashboard chart component placeholder."""
+

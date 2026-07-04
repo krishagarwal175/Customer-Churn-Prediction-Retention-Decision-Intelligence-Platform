@@ -1,0 +1,10 @@
+[project]
+name = "customer-churn-decision-intelligence"
+version = "0.1.0"
+description = "Decision intelligence platform scaffold for customer churn prediction and retention analytics."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+

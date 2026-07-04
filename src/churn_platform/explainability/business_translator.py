@@ -1,0 +1,2 @@
+"""Business explanation translation placeholder."""
+
