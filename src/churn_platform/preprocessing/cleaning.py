@@ -1,160 +1,423 @@
-"""Cleaning transformers for raw validated churn data."""
+"""Deterministic cleaning for churn preprocessing."""
 
 from __future__ import annotations
 
 import logging
 from typing import Any
+from typing import Final
 
 import pandas as pd
-from sklearn.base import BaseEstimator, TransformerMixin
+from pandas.api.types import is_object_dtype, is_string_dtype
 
-from churn_platform.preprocessing.preprocessing_config import CleaningConfig
+LOGGER_NAME: Final = __name__
 
-LOGGER = logging.getLogger(__name__)
+__all__ = ["DataCleaner"]
 
 
-class DataCleaner(BaseEstimator, TransformerMixin):
-    """Clean source columns without engineering new features.
+class DataCleaner:
+    """Apply deterministic, non-mutating cleaning to a churn dataset.
+    This cleaner performs only deterministic preprocessing steps:
+    - strip whitespace from column names
+    - strip whitespace from string values
+    - replace empty strings with ``pd.NA``
+    - safely convert the configured "Total Charges" column to numeric
+    - remove duplicate rows
+    - remove identifier columns
+    - remove leakage columns
+    - preserve the target column
+    - validate required columns remain
+    - validate duplicate customer IDs when an identifier column exists
 
-    The transformer is intentionally conservative: it standardizes whitespace,
-    normalizes empty strings, converts known numeric columns, fills missing
-    values according to configuration, and keeps original feature semantics.
+    The input DataFrame is never mutated.
     """
 
-    def __init__(self, config: CleaningConfig | None = None) -> None:
-        self.config = config or CleaningConfig()
-        self.numeric_fill_values_: dict[str, float] = {}
-        self.categorical_columns_: list[str] = []
-        self.numeric_columns_: list[str] = []
+    def __init__(
+        self,
+        config: Any,
+        schema: Any,
+        logger: logging.Logger | None = None,
+    ) -> None:
+        """Initialize the cleaner.
 
-    def fit(self, X: pd.DataFrame, y: Any = None) -> "DataCleaner":
-        """Learn training-set imputation values."""
+        Args:
+            config: Configuration object or mapping.
+            schema: Schema object or mapping describing target, required,
+                identifier, and leakage columns.
+            logger: Optional logger instance.
 
-        dataframe = self._basic_clean(X)
-        self.numeric_columns_ = dataframe.select_dtypes(
-            include=["number"]
-        ).columns.tolist()
-        self.categorical_columns_ = [
-            column
-            for column in dataframe.columns
-            if column not in self.numeric_columns_
+        Raises:
+            TypeError: If config or schema is None.
+            ValueError: If required configuration values are invalid.
+        """
+        if config is None:
+            raise TypeError("`config` must not be None.")
+        if schema is None:
+            raise TypeError("`schema` must not be None.")
+
+        self._config = config
+        self._schema = schema
+        self._logger = logger or logging.getLogger(__name__)
+        self._report: dict[str, Any] = {}
+
+        total_charges_column = self._get_config(
+            "total_charges_column",
+            default="Total Charges",
+        )
+        if (
+            not isinstance(total_charges_column, str)
+            or not total_charges_column.strip()
+        ):
+            raise ValueError(
+                "Configuration field 'total_charges_column' must be a non-empty string."
+            )
+
+        target_column = self._get_schema("target_column")
+        if target_column is not None and not isinstance(target_column, str):
+            raise ValueError("Schema field 'target_column' must be a string.")
+
+        for field_name in ("required_columns", "identifier_columns", "leakage_columns"):
+            value = self._get_schema(field_name, default=[])
+            if isinstance(value, str):
+                raise ValueError(
+                    f"Schema field '{field_name}' must be a list-like collection, not a string."
+                )
+            if value is not None:
+                try:
+                    list(value)
+                except TypeError as exc:
+                    raise ValueError(
+                        f"Schema field '{field_name}' must be a list-like collection."
+                    ) from exc
+
+    def clean(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Clean the input DataFrame and return a new DataFrame.
+
+        Args:
+            df: Input dataset.
+
+        Returns:
+            A new cleaned DataFrame.
+
+        Raises:
+            TypeError: If df is not a pandas DataFrame.
+            ValueError: If the DataFrame is invalid or required columns are
+               missing after cleaning.
+        """
+        validated_df = self._validate_dataframe(df)
+        cleaned_df = validated_df.copy(deep=True)
+
+        self._report = {
+            "rows_before": int(len(cleaned_df)),
+            "rows_after": None,
+            "duplicates_removed": 0,
+            "columns_removed": [],
+            "missing_values_created": 0,
+            "warnings": [],
+        }
+
+        self._logger.info(
+            "Starting data cleaning: rows=%d, columns=%d",
+            len(cleaned_df),
+            len(cleaned_df.columns),
+        )
+
+        cleaned_df = self._normalize_column_names(cleaned_df)
+        cleaned_df = self._clean_string_values(cleaned_df)
+        cleaned_df = self._convert_total_charges(cleaned_df)
+
+        rows_before_dedup = len(cleaned_df)
+        cleaned_df = cleaned_df.drop_duplicates()
+        self._report["duplicates_removed"] = int(rows_before_dedup - len(cleaned_df))
+        self._logger.info(
+            "Removed duplicate rows: %d",
+            self._report["duplicates_removed"],
+        )
+
+        cleaned_df = self._remove_columns(cleaned_df, schema_key="identifier_columns")
+        cleaned_df = self._remove_columns(cleaned_df, schema_key="leakage_columns")
+        cleaned_df = self._validate_output(cleaned_df)
+
+        self._report["rows_after"] = int(len(cleaned_df))
+
+        self._logger.info(
+            "Completed data cleaning: rows_before=%d, rows_after=%d, "
+            "duplicates_removed=%d, columns_removed=%d, missing_values_created=%d",
+            self._report["rows_before"],
+            self._report["rows_after"],
+            self._report["duplicates_removed"],
+            len(self._report["columns_removed"]),
+            self._report["missing_values_created"],
+        )
+
+        return cleaned_df
+
+    def get_report(self) -> dict[str, Any]:
+        """Return the most recent cleaning report.
+
+        Returns:
+            A shallow copy of the internal cleaning report dictionary.
+        """
+        return self._report.copy()
+
+    def _validate_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Validate the input DataFrame.
+
+        Args:
+            df: Input object expected to be a pandas DataFrame.
+
+        Returns:
+            The validated DataFrame.
+
+        Raises:
+            TypeError: If the input is not a pandas DataFrame.
+            ValueError: If the DataFrame is empty or has duplicate columns.
+        """
+        if not isinstance(df, pd.DataFrame):
+            self._logger.error(
+                "Input validation failed: expected pandas DataFrame, got %s.",
+                type(df).__name__,
+            )
+            raise TypeError(
+                f"`df` must be a pandas DataFrame, got {type(df).__name__}."
+            )
+
+        if len(df) == 0:
+            self._logger.error("Input validation failed: DataFrame has zero rows.")
+            raise ValueError("Input DataFrame must contain at least one row.")
+
+        if df.columns.has_duplicates:
+            duplicate_columns = df.columns[df.columns.duplicated()].tolist()
+            self._logger.error(
+                "Input validation failed: duplicate column names found: %s",
+                duplicate_columns,
+            )
+            raise ValueError(
+                "Input DataFrame contains duplicate column names: "
+                f"{duplicate_columns}"
+            )
+
+        return df
+
+    def _normalize_column_names(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Strip whitespace from column names.
+
+        Args:
+            df: Input DataFrame.
+
+        Returns:
+            DataFrame with normalized column names.
+
+        Raises:
+            ValueError: If normalization creates duplicate column names.
+        """
+        original_columns = list(df.columns)
+        normalized_columns = [
+            column.strip() if isinstance(column, str) else column
+            for column in original_columns
         ]
 
-        for column in self.numeric_columns_:
-            if self.config.numeric_imputation_strategy == "median":
-                fill_value = dataframe[column].median()
-            elif self.config.numeric_imputation_strategy == "mean":
-                fill_value = dataframe[column].mean()
-            else:
-                fill_value = 0
-            self.numeric_fill_values_[column] = float(
-                0 if pd.isna(fill_value) else fill_value
+        if len(set(normalized_columns)) != len(normalized_columns):
+            duplicates: list[Any] = []
+            seen: set[Any] = set()
+            for column in normalized_columns:
+                if column in seen and column not in duplicates:
+                    duplicates.append(column)
+                seen.add(column)
+
+            self._logger.error(
+                "Column normalization failed: duplicate columns created: %s",
+                duplicates,
+            )
+            raise ValueError(
+                "Column name normalization created duplicate columns: " f"{duplicates}"
             )
 
-        LOGGER.info(
-            "DataCleaner fitted: numeric_columns=%s categorical_columns=%s",
-            len(self.numeric_columns_),
-            len(self.categorical_columns_),
+        renamed_df = df.rename(columns=dict(zip(original_columns, normalized_columns)))
+
+        renamed_count = sum(
+            before != after
+            for before, after in zip(original_columns, normalized_columns)
         )
-        return self
+        self._logger.info("Normalized column names: %d renamed.", renamed_count)
 
-    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
-        """Apply cleaning and configured missing-value handling."""
+        return renamed_df
 
-        dataframe = self._basic_clean(X)
+    def _clean_string_values(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Strip whitespace from string values and replace empty strings with NA.
 
-        for column, fill_value in self.numeric_fill_values_.items():
-            if column in dataframe.columns:
-                missing_before = int(dataframe[column].isna().sum())
-                dataframe[column] = dataframe[column].fillna(fill_value)
-                if missing_before:
-                    LOGGER.info(
-                        "Filled %s missing numeric values in '%s' with %s",
-                        missing_before,
-                        column,
-                        fill_value,
-                    )
+        Args:
+            df: Input DataFrame.
 
-        for column in dataframe.columns:
-            if column not in self.numeric_fill_values_:
-                missing_before = int(dataframe[column].isna().sum())
-                dataframe[column] = dataframe[column].fillna(
-                    self.config.categorical_fill_value
-                )
-                if missing_before:
-                    LOGGER.info(
-                        "Filled %s missing categorical values in '%s' with '%s'",
-                        missing_before,
-                        column,
-                        self.config.categorical_fill_value,
-                    )
+        Returns:
+            DataFrame with cleaned string values.
+        """
+        cleaned_df = df.copy(deep=True)
+        missing_values_created = 0
 
-        return dataframe
+        for column in cleaned_df.columns:
+            series = cleaned_df[column]
+            if not (is_object_dtype(series) or is_string_dtype(series)):
+                continue
 
-    def _basic_clean(self, X: pd.DataFrame) -> pd.DataFrame:
-        dataframe = X.copy()
+            stripped = series.map(
+                lambda value: value.strip() if isinstance(value, str) else value
+            )
+            empty_mask = stripped.eq("").fillna(False)
+            missing_values_created += int(empty_mask.sum())
+            cleaned_df[column] = stripped.mask(empty_mask, pd.NA)
 
-        for column in dataframe.select_dtypes(include=["object", "string"]).columns:
-            dataframe[column] = dataframe[column].astype("string").str.strip()
-            dataframe[column] = dataframe[column].replace("", pd.NA)
+        self._report["missing_values_created"] += missing_values_created
+        self._logger.info(
+            "Cleaned string values; empty strings converted to NA=%d.",
+            missing_values_created,
+        )
 
-        total_charges = self.config.total_charges_column
-        tenure = self.config.tenure_column
-        if total_charges in dataframe.columns:
-            LOGGER.info("Converting '%s' to numeric", total_charges)
-            dataframe[total_charges] = pd.to_numeric(
-                dataframe[total_charges], errors="coerce"
+        return cleaned_df
+
+    def _convert_total_charges(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Safely convert the Total Charges column to numeric when present.
+
+        Args:
+           df: Input DataFrame.
+
+        Returns:
+            DataFrame with the Total Charges column converted when present.
+        """
+        cleaned_df = df.copy(deep=True)
+        column_name = self._get_config(
+            "total_charges_column",
+            default="Total Charges",
+        )
+        column_name = column_name.strip()
+
+        if column_name not in cleaned_df.columns:
+            warning = (
+                f"Configured Total Charges column '{column_name}' not found; "
+                "numeric conversion skipped."
+            )
+            self._report["warnings"].append(warning)
+            self._logger.warning(warning)
+            return cleaned_df
+
+        series_before = cleaned_df[column_name]
+        missing_before = int(series_before.isna().sum())
+        converted = pd.to_numeric(series_before, errors="coerce")
+        missing_after = int(converted.isna().sum())
+        created_missing = max(0, missing_after - missing_before)
+
+        cleaned_df[column_name] = converted
+        self._report["missing_values_created"] += created_missing
+
+        self._logger.info(
+            "Converted '%s' to numeric; additional missing values created=%d.",
+            column_name,
+            created_missing,
+        )
+
+        return cleaned_df
+
+    def _validate_output(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Validate that required columns remain after cleaning.
+
+        Also validates duplicate customer IDs if an identifier column exists.
+
+        Args:
+            df: Cleaned DataFrame.
+
+        Returns:
+            The validated DataFrame.
+
+        Raises:
+            ValueError: If required columns are missing, target is missing,
+                or duplicate customer IDs are found.
+        """
+        required_columns = list(self._get_schema("required_columns", default=[]))
+        target_column = self._get_schema("target_column")
+        identifier_columns = list(self._get_schema("identifier_columns", default=[]))
+
+        missing_required = [
+            column for column in required_columns if column not in df.columns
+        ]
+        if missing_required:
+            self._logger.error(
+                "Output validation failed: required columns missing: %s",
+                missing_required,
+            )
+            raise ValueError(
+                "Required columns are missing after cleaning: " f"{missing_required}"
             )
 
-            if tenure in dataframe.columns:
-                zero_tenure_mask = dataframe[tenure].fillna(-1).eq(0)
-                missing_total_mask = dataframe[total_charges].isna()
-                fill_mask = zero_tenure_mask & missing_total_mask
-                if fill_mask.any():
-                    dataframe.loc[fill_mask, total_charges] = (
-                        self.config.zero_tenure_total_charges_value
-                    )
-                    LOGGER.info(
-                        "Filled %s zero-tenure '%s' values with %s",
-                        int(fill_mask.sum()),
-                        total_charges,
-                        self.config.zero_tenure_total_charges_value,
-                    )
+        if target_column is not None and target_column not in df.columns:
+            self._logger.error(
+                "Output validation failed: target column missing: %s",
+                target_column,
+            )
+            raise ValueError(
+                f"Target column '{target_column}' is missing after cleaning."
+            )
 
-        for column in dataframe.columns:
-            if column != total_charges:
-                numeric_candidate = pd.to_numeric(dataframe[column], errors="coerce")
-                non_missing_count = int(dataframe[column].notna().sum())
-                numeric_count = int(numeric_candidate.notna().sum())
-                if non_missing_count > 0 and numeric_count == non_missing_count:
-                    dataframe[column] = numeric_candidate
+        identifier_column = next(
+            (column for column in identifier_columns if column in df.columns),
+            None,
+        )
+        if identifier_column is not None and df[identifier_column].duplicated().any():
+            duplicate_count = int(df[identifier_column].duplicated().sum())
+            self._logger.error(
+                "Output validation failed: duplicate customer IDs found in '%s': %d",
+                identifier_column,
+                duplicate_count,
+            )
+            raise ValueError(
+                f"Duplicate customer IDs found in identifier column "
+                f"'{identifier_column}': {duplicate_count}"
+            )
 
-        return dataframe
+        self._logger.info(
+            "Output validation succeeded: rows=%d, columns=%d.",
+            len(df),
+            len(df.columns),
+        )
+        return df
 
+    def _remove_columns(self, df: pd.DataFrame, schema_key: str) -> pd.DataFrame:
+        """Remove schema-defined columns while preserving the target column.
 
-def define_binary_target(dataframe: pd.DataFrame, config: CleaningConfig) -> pd.Series:
-    """Convert the configured churn target into binary labels.
+        Args:
+            df: Input DataFrame.
+            schema_key: Schema key containing columns to remove.
 
-    Args:
-        dataframe: Cleaned dataset containing the configured target column.
-        config: Cleaning configuration with target label definitions.
+        Returns:
+            DataFrame with the requested columns removed.
+        """
+        columns = list(self._get_schema(schema_key, default=[]))
+        target_column = self._get_schema("target_column")
 
-    Returns:
-        Binary target series where the positive churn label is 1.
-    """
+        removable = [
+            column
+            for column in columns
+            if column in df.columns and column != target_column
+        ]
+        if not removable:
+            self._logger.info("No %s removed.", schema_key.replace("_", " "))
+            return df
 
-    if config.target_column not in dataframe.columns:
-        raise KeyError(f"Target column is missing: {config.target_column}")
+        cleaned_df = df.drop(columns=removable)
+        self._report["columns_removed"].extend(removable)
+        self._logger.info(
+            "Removed %s: %d",
+            schema_key.replace("_", " "),
+            len(removable),
+        )
+        return cleaned_df
 
-    target = dataframe[config.target_column].astype("string").str.strip()
-    mapping = {
-        config.positive_target_label: 1,
-        config.negative_target_label: 0,
-    }
-    encoded = target.map(mapping)
-    if encoded.isna().any():
-        unexpected = sorted(target[encoded.isna()].dropna().unique().tolist())
-        raise ValueError(f"Unexpected target labels found: {unexpected}")
+    def _get_config(self, key: str, default: Any = None) -> Any:
+        """Return a configuration value from a mapping or object."""
+        if isinstance(self._config, dict):
+            return self._config.get(key, default)
+        return getattr(self._config, key, default)
 
-    LOGGER.info("Defined binary target from '%s'", config.target_column)
-    return encoded.astype(int)
+    def _get_schema(self, key: str, default: Any = None) -> Any:
+        """Return a schema value from a mapping or object."""
+        if isinstance(self._schema, dict):
+            return self._schema.get(key, default)
+        return getattr(self._schema, key, default)

@@ -16,3 +16,21 @@ paths:
 runtime:
   random_seed: 42
   log_level: INFO
+  total_charges_column: Total Charges
+
+schema:
+  target_column: Churn Label
+
+  identifier_columns:
+    - CustomerID
+
+  leakage_columns:
+    - Churn Value
+    - Churn Score
+    - Churn Reason
+
+  required_columns:
+  - Churn Label
+  - Monthly Charges
+  - Total Charges
+  - Tenure Months
