@@ -74,4 +74,6 @@ def test_validate_dataset_fails_for_unexpected_category() -> None:
     result = validate_dataset(dataframe, schema)
 
     assert result.passed is False
-    assert any(issue.check == "unexpected_categorical_values" for issue in result.issues)
+    assert any(
+        issue.check == "unexpected_categorical_values" for issue in result.issues
+    )

@@ -22,4 +22,3 @@ def test_configured_leakage_columns_include_schema_leakage_columns() -> None:
 
     assert required.issubset(configured)
     assert required.issubset(set(schema.leakage_columns))
-

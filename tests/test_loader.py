@@ -34,4 +34,3 @@ def test_load_dataset_raises_for_unsupported_extension(tmp_path: Path) -> None:
 
     with pytest.raises(DatasetLoadError):
         load_dataset(dataset_path)
-

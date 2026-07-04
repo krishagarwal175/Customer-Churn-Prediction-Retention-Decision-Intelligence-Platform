@@ -20,4 +20,3 @@ def test_schema_marks_known_leakage_columns() -> None:
     assert "Churn Reason" in schema.leakage_columns
     assert "Churn Score" in schema.leakage_columns
     assert "Churn Value" in schema.leakage_columns
-

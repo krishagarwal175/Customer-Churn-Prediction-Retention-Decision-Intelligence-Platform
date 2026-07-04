@@ -1,5 +1,3 @@
-"""Deterministic cleaning for churn preprocessing."""
-
 from __future__ import annotations
 
 import logging
@@ -58,6 +56,7 @@ class DataCleaner:
         self._schema = schema
         self._logger = logger or logging.getLogger(__name__)
         self._report: dict[str, Any] = {}
+        self._input_had_target_column = False
 
         total_charges_column = self._get_config(
             "total_charges_column",
@@ -105,6 +104,15 @@ class DataCleaner:
         """
         validated_df = self._validate_dataframe(df)
         cleaned_df = validated_df.copy(deep=True)
+
+        normalized_input_columns = [
+            column.strip() if isinstance(column, str) else column
+            for column in validated_df.columns
+        ]
+        target_column = self._get_schema("target_column")
+        self._input_had_target_column = (
+            target_column is not None and target_column in normalized_input_columns
+        )
 
         self._report = {
             "rows_before": int(len(cleaned_df)),
@@ -335,6 +343,11 @@ class DataCleaner:
         target_column = self._get_schema("target_column")
         identifier_columns = list(self._get_schema("identifier_columns", default=[]))
 
+        if not self._input_had_target_column and target_column is not None:
+            required_columns = [
+                column for column in required_columns if column != target_column
+            ]
+
         missing_required = [
             column for column in required_columns if column not in df.columns
         ]
@@ -347,7 +360,11 @@ class DataCleaner:
                 "Required columns are missing after cleaning: " f"{missing_required}"
             )
 
-        if target_column is not None and target_column not in df.columns:
+        if (
+            self._input_had_target_column
+            and target_column is not None
+            and target_column not in df.columns
+        ):
             self._logger.error(
                 "Output validation failed: target column missing: %s",
                 target_column,

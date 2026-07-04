@@ -1,2 +1,1 @@
 """Model pipeline test placeholders."""
-
