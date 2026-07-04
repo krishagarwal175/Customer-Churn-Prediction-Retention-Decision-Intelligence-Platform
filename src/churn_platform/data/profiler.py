@@ -39,9 +39,7 @@ def build_profile_report(
         or dtype_map.get(column) in {"integer", "float"}
     ]
     categorical_columns = [
-        column
-        for column in dataframe.columns
-        if column not in numerical_columns
+        column for column in dataframe.columns if column not in numerical_columns
     ]
 
     lines: list[str] = [
@@ -89,7 +87,15 @@ def build_profile_report(
     else:
         lines.append("Target column is not available.")
 
-    lines.extend(["", "## Unique Values", "", "| Column | Unique Values | Sample Values |", "|---|---:|---|"])
+    lines.extend(
+        [
+            "",
+            "## Unique Values",
+            "",
+            "| Column | Unique Values | Sample Values |",
+            "|---|---:|---|",
+        ]
+    )
 
     for column in dataframe.columns:
         unique_count = int(dataframe[column].nunique(dropna=True))

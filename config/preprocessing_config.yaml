@@ -1,0 +1,35 @@
+paths:
+  input_dataset: data/interim/Telco_customer_churn_validated.xlsx
+  processed_data_dir: data/processed
+  preprocessor_artifact: artifacts/preprocessors/preprocessing_pipeline.joblib
+  preprocessing_report: reports/preprocessing_report.md
+
+runtime:
+  random_seed: 42
+  log_level: INFO
+
+preprocessing:
+  target_column: Churn Label
+  positive_target_label: Yes
+  negative_target_label: No
+  identifier_columns: [CustomerID]
+  leakage_columns: [Churn Value, Churn Score, Churn Reason, Churn Category, Customer Status]
+  reporting_columns: [Count, Country, State, Lat Long]
+  use_reporting_features: false
+  categorical_fill_value: Unknown
+  numeric_imputation_strategy: median
+  total_charges_column: Total Charges
+  tenure_column: Tenure Months
+  zero_tenure_total_charges_value: 0.0
+  encoder: onehot
+  handle_unknown: ignore
+  scale_numeric: true
+  scaler: standard
+
+split:
+  train_size: 0.70
+  validation_size: 0.15
+  test_size: 0.15
+  random_state: 42
+  stratify: true
+

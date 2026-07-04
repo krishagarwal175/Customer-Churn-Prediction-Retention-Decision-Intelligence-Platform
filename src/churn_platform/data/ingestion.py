@@ -74,12 +74,18 @@ def run_ingestion(config_path: str | Path = "config/config.yaml") -> int:
     configure_logging(runtime_config.get("log_level", "INFO"))
 
     paths = config.get("paths", {})
-    raw_dataset_file = Path(paths.get("raw_dataset_file", "data/raw/Telco_customer_churn.xlsx"))
+    raw_dataset_file = Path(
+        paths.get("raw_dataset_file", "data/raw/Telco_customer_churn.xlsx")
+    )
     validated_dataset_file = Path(
-        paths.get("validated_dataset_file", "data/interim/Telco_customer_churn_validated.xlsx")
+        paths.get(
+            "validated_dataset_file", "data/interim/Telco_customer_churn_validated.xlsx"
+        )
     )
     profile_report = Path(paths.get("profile_report", "reports/data_profile.md"))
-    validation_report = Path(paths.get("validation_report", "reports/validation_results.json"))
+    validation_report = Path(
+        paths.get("validation_report", "reports/validation_results.json")
+    )
 
     LOGGER.info("Starting ingestion pipeline")
     dataframe = load_dataset(raw_dataset_file)
@@ -104,7 +110,9 @@ def run_ingestion(config_path: str | Path = "config/config.yaml") -> int:
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments."""
 
-    parser = argparse.ArgumentParser(description="Run raw dataset ingestion and validation.")
+    parser = argparse.ArgumentParser(
+        description="Run raw dataset ingestion and validation."
+    )
     parser.add_argument(
         "--config",
         default="config/config.yaml",

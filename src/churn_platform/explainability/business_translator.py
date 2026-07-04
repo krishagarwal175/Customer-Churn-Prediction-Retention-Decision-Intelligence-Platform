@@ -1,2 +1,1 @@
 """Business explanation translation placeholder."""
-

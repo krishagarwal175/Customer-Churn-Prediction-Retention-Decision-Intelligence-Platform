@@ -1,2 +1,1 @@
 """Project path utility placeholder."""
-

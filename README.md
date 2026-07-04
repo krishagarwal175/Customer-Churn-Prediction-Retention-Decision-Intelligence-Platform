@@ -74,6 +74,43 @@ python -m churn_platform.data.ingestion --config config/config.yaml
 
 If the package has not been installed in editable mode, set `PYTHONPATH=src` before running the command.
 
+## Preprocessing Pipeline
+
+The preprocessing pipeline consumes the validated interim dataset from `data/interim/` and produces machine-learning-ready train, validation, and test arrays in `data/processed/`. Configuration lives in `config/preprocessing_config.yaml`.
+
+Run preprocessing from the project root:
+
+```bash
+python -m churn_platform.preprocessing.pipeline --config config/preprocessing_config.yaml
+```
+
+The pipeline performs whitespace trimming, empty-string normalization, `Total Charges` numeric conversion, missing-value handling, target conversion, leakage/identifier/reporting column removal, automatic categorical encoding with `OneHotEncoder(handle_unknown="ignore")`, optional numerical scaling with `StandardScaler`, and stratified 70/15/15 splitting.
+
+## Feature Selection
+
+Feature selection is configuration-driven. The selected target is `Churn Label`, mapped to binary labels where `Yes = 1` and `No = 0`. Identifier columns, duplicate target columns, post-event leakage columns, and reporting-only columns are separated from model features before encoding and scaling.
+
+Removed by default:
+
+- Identifier: `CustomerID`
+- Leakage or duplicate target: `Churn Value`, `Churn Score`, `Churn Reason`, `Churn Category`, `Customer Status`
+- Reporting-only: `Count`, `Country`, `State`, `Lat Long`
+- Target as feature: `Churn Label`
+
+## Data Flow
+
+```mermaid
+flowchart LR
+    A["data/raw"] --> B["Ingestion Validation"]
+    B --> C["data/interim validated copy"]
+    C --> D["Cleaning"]
+    D --> E["Feature/Target Separation"]
+    E --> F["Stratified Split"]
+    F --> G["Fit Preprocessing on Train"]
+    G --> H["Transform Validation/Test"]
+    H --> I["data/processed + preprocessor artifact"]
+```
+
 ## Next Implementation Phase
 
 The next phase should implement dataset ingestion and validation only, following the milestone roadmap. Business logic should remain separated from machine learning logic and dashboard logic.

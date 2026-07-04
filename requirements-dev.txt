@@ -1,0 +1,7 @@
+jupyter
+ipykernel
+pytest
+ruff
+black
+isort
+pre-commit

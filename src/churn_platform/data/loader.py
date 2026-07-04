@@ -61,4 +61,3 @@ def load_dataset(file_path: str | Path) -> pd.DataFrame:
         dataframe.shape[1],
     )
     return dataframe
-

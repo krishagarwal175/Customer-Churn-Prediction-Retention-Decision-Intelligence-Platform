@@ -223,25 +223,37 @@ def validate_dataset(
                 )
 
         if column.minimum is not None:
-            invalid_min = int((pd.to_numeric(series, errors="coerce") < column.minimum).sum())
+            invalid_min = int(
+                (pd.to_numeric(series, errors="coerce") < column.minimum).sum()
+            )
             if invalid_min:
                 _add_issue(
                     issues,
                     "invalid_numerical_values",
                     "error",
                     f"Column '{column.name}' contains values below minimum.",
-                    {"column": column.name, "minimum": column.minimum, "count": invalid_min},
+                    {
+                        "column": column.name,
+                        "minimum": column.minimum,
+                        "count": invalid_min,
+                    },
                 )
 
         if column.maximum is not None:
-            invalid_max = int((pd.to_numeric(series, errors="coerce") > column.maximum).sum())
+            invalid_max = int(
+                (pd.to_numeric(series, errors="coerce") > column.maximum).sum()
+            )
             if invalid_max:
                 _add_issue(
                     issues,
                     "invalid_numerical_values",
                     "error",
                     f"Column '{column.name}' contains values above maximum.",
-                    {"column": column.name, "maximum": column.maximum, "count": invalid_max},
+                    {
+                        "column": column.name,
+                        "maximum": column.maximum,
+                        "count": invalid_max,
+                    },
                 )
 
     passed = not any(issue.severity == "error" for issue in issues)

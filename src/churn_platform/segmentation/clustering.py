@@ -1,2 +1,1 @@
 """Customer clustering placeholder."""
-

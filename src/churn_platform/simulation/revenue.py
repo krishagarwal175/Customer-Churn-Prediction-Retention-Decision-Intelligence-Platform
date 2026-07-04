@@ -1,2 +1,1 @@
 """Revenue impact simulation placeholder."""
-

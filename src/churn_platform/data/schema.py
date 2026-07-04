@@ -167,4 +167,3 @@ def get_schema() -> DatasetSchema:
     """Return the active source dataset schema."""
 
     return IBM_TELCO_SCHEMA
-

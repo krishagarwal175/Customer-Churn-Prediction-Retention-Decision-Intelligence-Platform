@@ -1,2 +1,1 @@
 """Business persona labeling placeholder."""
-
