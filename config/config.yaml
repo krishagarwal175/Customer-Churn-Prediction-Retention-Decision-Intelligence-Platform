@@ -4,12 +4,15 @@ project:
 
 paths:
   raw_data: data/raw
+  raw_dataset_file: data/raw/Telco_customer_churn.xlsx
   interim_data: data/interim
+  validated_dataset_file: data/interim/Telco_customer_churn_validated.xlsx
   processed_data: data/processed
   artifacts: artifacts
   reports: reports
+  profile_report: reports/data_profile.md
+  validation_report: reports/validation_results.json
 
 runtime:
   random_seed: 42
   log_level: INFO
-

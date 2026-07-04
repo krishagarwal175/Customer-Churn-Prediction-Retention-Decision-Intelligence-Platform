@@ -1,0 +1,94 @@
+{
+  "passed": true,
+  "row_count": 7043,
+  "column_count": 33,
+  "issues": [
+    {
+      "check": "empty_strings",
+      "severity": "warning",
+      "message": "Column 'Total Charges' contains empty strings.",
+      "details": {
+        "column": "Total Charges",
+        "empty_string_count": 11
+      }
+    },
+    {
+      "check": "empty_strings",
+      "severity": "warning",
+      "message": "Column 'Churn Reason' contains empty strings.",
+      "details": {
+        "column": "Churn Reason",
+        "empty_string_count": 5174
+      }
+    }
+  ],
+  "metrics": {
+    "shape": {
+      "rows": 7043,
+      "columns": 33
+    },
+    "duplicate_rows": 0,
+    "missing_values": {
+      "CustomerID": 0,
+      "Count": 0,
+      "Country": 0,
+      "State": 0,
+      "City": 0,
+      "Zip Code": 0,
+      "Lat Long": 0,
+      "Latitude": 0,
+      "Longitude": 0,
+      "Gender": 0,
+      "Senior Citizen": 0,
+      "Partner": 0,
+      "Dependents": 0,
+      "Tenure Months": 0,
+      "Phone Service": 0,
+      "Multiple Lines": 0,
+      "Internet Service": 0,
+      "Online Security": 0,
+      "Online Backup": 0,
+      "Device Protection": 0,
+      "Tech Support": 0,
+      "Streaming TV": 0,
+      "Streaming Movies": 0,
+      "Contract": 0,
+      "Paperless Billing": 0,
+      "Payment Method": 0,
+      "Monthly Charges": 0,
+      "Total Charges": 0,
+      "Churn Label": 0,
+      "Churn Value": 0,
+      "Churn Score": 0,
+      "CLTV": 0,
+      "Churn Reason": 5174
+    },
+    "empty_strings": {
+      "CustomerID": 0,
+      "Country": 0,
+      "State": 0,
+      "City": 0,
+      "Lat Long": 0,
+      "Gender": 0,
+      "Senior Citizen": 0,
+      "Partner": 0,
+      "Dependents": 0,
+      "Phone Service": 0,
+      "Multiple Lines": 0,
+      "Internet Service": 0,
+      "Online Security": 0,
+      "Online Backup": 0,
+      "Device Protection": 0,
+      "Tech Support": 0,
+      "Streaming TV": 0,
+      "Streaming Movies": 0,
+      "Contract": 0,
+      "Paperless Billing": 0,
+      "Payment Method": 0,
+      "Total Charges": 11,
+      "Churn Label": 0,
+      "Churn Reason": 5174
+    },
+    "duplicate_customer_ids": 0
+  }
+}
