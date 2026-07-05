@@ -34,3 +34,60 @@ schema:
   - Monthly Charges
   - Total Charges
   - Tenure Months
+
+  # Semantic column mapping consumed by BusinessEDA (analysis-only).
+  # Maps logical business roles to actual dataset column names so the
+  # analysis layer never hardcodes dataset schema.
+  eda:
+    churn_column: Churn Label
+    positive_churn_value: "Yes"
+    monthly_charges_column: Monthly Charges
+    total_charges_column: Total Charges
+    tenure_column: Tenure Months
+    contract_column: Contract
+    month_to_month_value: Month-to-month
+    service_columns:
+      - Phone Service
+      - Multiple Lines
+      - Internet Service
+      - Online Security
+      - Online Backup
+      - Device Protection
+      - Tech Support
+      - Streaming TV
+      - Streaming Movies
+    segment_columns:
+      - Senior Citizen
+      - Partner
+      - Dependents
+      - Paperless Billing
+      - Payment Method
+
+  # Semantic mapping consumed by FeatureEngineer (feature layer).
+  # Additive and analysis-side only; downstream ML modules read from here.
+  features:
+    tenure_column: Tenure Months
+    contract_column: Contract
+    monthly_charges_column: Monthly Charges
+    total_charges_column: Total Charges
+    cltv_column: CLTV
+    service_columns:
+      - Phone Service
+      - Multiple Lines
+      - Internet Service
+      - Online Security
+      - Online Backup
+      - Device Protection
+      - Tech Support
+      - Streaming TV
+      - Streaming Movies
+    # Values that indicate a service is NOT subscribed.
+    non_service_values:
+      - "No"
+      - No phone service
+      - No internet service
+    # Ordinal commitment strength per contract type.
+    contract_commitment_scores:
+      Month-to-month: 0
+      One year: 1
+      Two year: 2
