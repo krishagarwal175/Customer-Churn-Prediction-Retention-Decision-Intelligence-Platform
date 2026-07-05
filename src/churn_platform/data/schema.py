@@ -22,6 +22,10 @@ class ColumnSchema:
     nullable: bool = False
     minimum: float | None = None
     maximum: float | None = None
+    coerce_numeric: bool = False
+    """True when a numeric column may arrive as text (e.g. blanks) and should
+    be validated via numeric coercion rather than strict dtype matching. Keeps
+    dataset-specific quirks in the schema instead of validation logic."""
 
 
 @dataclass(frozen=True)
@@ -134,7 +138,7 @@ IBM_TELCO_SCHEMA = DatasetSchema(
             ),
         ),
         ColumnSchema("Monthly Charges", "float", minimum=0),
-        ColumnSchema("Total Charges", "float", minimum=0),
+        ColumnSchema("Total Charges", "float", minimum=0, coerce_numeric=True),
         ColumnSchema("Churn Label", "category", allowed_values=YES_NO),
         ColumnSchema("Churn Value", "integer", allowed_values=(0, 1)),
         ColumnSchema("Churn Score", "integer", minimum=0, maximum=100),

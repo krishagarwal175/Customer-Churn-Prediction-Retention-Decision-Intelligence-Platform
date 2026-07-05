@@ -179,9 +179,7 @@ def validate_dataset(
             metrics["empty_strings"][column.name] = empty_count
             if empty_count:
                 severity = (
-                    "warning"
-                    if column.nullable or column.name == "Total Charges"
-                    else "error"
+                    "warning" if column.nullable or column.coerce_numeric else "error"
                 )
                 _add_issue(
                     issues,
@@ -191,7 +189,7 @@ def validate_dataset(
                     {"column": column.name, "empty_string_count": empty_count},
                 )
 
-        if column.name == "Total Charges":
+        if column.coerce_numeric:
             dtype_matches = pd.to_numeric(series, errors="coerce").notna().sum() > 0
         else:
             dtype_matches = _matches_dtype(series, column.dtype)
