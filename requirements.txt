@@ -1,13 +1,9 @@
-pandas>=2.2
+# Runtime dependencies for the Vercel FastAPI deployment (kept slim).
+# Heavy analytics/offline libraries (scikit-learn, xgboost, shap, plotly,
+# matplotlib) live in requirements-dev.txt and never ship to the serverless
+# runtime — the API serves precomputed artifacts and a lightweight NumPy model.
+fastapi>=0.110
+pydantic>=2.6
 numpy>=1.26
-scikit-learn>=1.5
-xgboost>=2.0
-shap>=0.45
-plotly>=5.22
-matplotlib>=3.9
-streamlit>=1.36
-joblib>=1.4
-PyYAML>=6.0
-python-dotenv>=1.0
-pytest>=8.2
-openpyxl>=3.1
+pandas>=2.2
+jinja2>=3.1

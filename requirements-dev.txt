@@ -1,6 +1,30 @@
+# Full local/offline stack: analytics engine, artifact building, API, and tooling.
+# Vercel does NOT install this file — see requirements.txt for the slim runtime.
+
+# Analytics engine + offline artifact building
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.5
+xgboost>=2.0
+shap>=0.45
+plotly>=5.22
+matplotlib>=3.9
+joblib>=1.4
+PyYAML>=6.0
+openpyxl>=3.1
+python-dotenv>=1.0
+
+# API (runtime + local serving)
+fastapi>=0.110
+pydantic>=2.6
+jinja2>=3.1
+uvicorn>=0.30
+
+# Tooling and tests
 jupyter
 ipykernel
-pytest
+pytest>=8.2
+httpx>=0.27
 ruff
 black
 isort
