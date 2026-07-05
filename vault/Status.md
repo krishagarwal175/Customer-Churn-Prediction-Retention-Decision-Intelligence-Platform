@@ -12,16 +12,17 @@
 - **Explainability** — SHAP global + per-customer, business-readable driver translation. Verified LR + XGB.
 - **Segmentation** — K-Means clustering + persona labelling. Verified on real data (4 coherent segments).
 - **Simulation** — expected-value revenue targeting (segment-specific uplift/cost) + full-grid sensitivity. Verified on real data (ROI 4.0).
+- **Recommendations** — hybrid persona+driver rules, expected-net-benefit prioritization, Top-N/budget cap. Verified end-to-end.
 - Memory vault initialized.
 
 ## Health
-- `ruff check .` clean · `black` formatted · `pytest` **64 passed**.
+- `ruff check .` clean · `black` formatted · `pytest` **74 passed**.
 
 ## Design decisions (user-chosen)
 - Modeling stays LR + XGBoost (NN/transformer deferred to a dedicated step).
 - Simulation: expected-value + segment economics + full-grid sensitivity.
 
 ## Next 🔜
-- Recommendations, reporting, Streamlit app. Optional: feature selection, model-selection orchestration script.
+- Reporting, then Streamlit app (UI: wait for user's detailed description before building). Optional: feature selection, model-selection orchestration script.
 
 See [[Open Questions]]

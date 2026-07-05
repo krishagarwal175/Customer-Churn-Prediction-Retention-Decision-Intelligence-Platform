@@ -50,4 +50,12 @@
 - 11 tests. Real E2E: ROI 4.0, ~$1.14M expected net benefit on 4817 targeted customers; grid responds to scale sweeps.
 - `ruff` clean · `black` formatted · `pytest` **64 passed**.
 
+### 2026-07-05 — Milestone: Recommendations
+- User-chosen design: hybrid (persona playbook + driver actions), expected-net-benefit prioritization, config-driven YAML catalog, Top-N/budget cap.
+- `recommendations/rules.py` → `RetentionRuleEngine` (+`from_config`): merges persona playbook + driver-triggered actions, de-duped/ordered.
+- `recommendations/prioritization.py` → `RetentionPrioritizer` + `PrioritizationConfig`: rank by expected net benefit, eligibility (net>0), optional top_n + budget cap; non-mutating.
+- Added `recommendations` catalog block to `config.yaml` (personas + driver_rules).
+- 10 tests. Real E2E: prioritized top-5 targets with sensible hybrid actions.
+- `ruff` clean · `black` formatted · `pytest` **74 passed**. Full platform pipeline now integrated end-to-end.
+
 _Next iteration: append here._

@@ -91,3 +91,32 @@ schema:
       Month-to-month: 0
       One year: 1
       Two year: 2
+
+# Retention recommendation catalog (config-driven).
+# personas: fixed playbook actions per persona (segment strategy).
+# driver_rules: actions triggered when a readable churn driver contains `match`
+# (individual precision). The two are merged into a hybrid recommendation.
+recommendations:
+  personas:
+    High-Value At-Risk:
+      - Priority retention call from a success manager
+      - Targeted loyalty discount
+    High-Value Loyal:
+      - Proactive value check-in and upsell review
+    Low-Value At-Risk:
+      - Automated retention email with incentive
+    Low-Value Stable:
+      - Standard lifecycle nurture
+  driver_rules:
+    - match: "Contract = Month-to-month"
+      action: Offer a discounted annual contract
+    - match: "Tech Support"
+      action: Bundle complimentary tech support
+    - match: "Online Security"
+      action: Offer a free online-security trial
+    - match: "Monthly Charges"
+      action: Review the plan for cost optimization
+    - match: "Tenure Months"
+      action: Enroll in an early-tenure onboarding program
+    - match: "Payment Method"
+      action: Encourage switching to automatic payment
