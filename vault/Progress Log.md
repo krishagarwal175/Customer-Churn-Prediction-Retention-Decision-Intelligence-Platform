@@ -36,4 +36,10 @@
 - 8 tests (new `test_explainability.py`). Verified both LR + XGB paths on real data; sensible top drivers (tenure, contract commitment, dependents).
 - `ruff` clean · `black` formatted · `pytest` **45 passed**.
 
+### 2026-07-05 — Milestone: Segmentation (clustering + personas)
+- `segmentation/clustering.py` → `CustomerSegmenter` + `SegmentationConfig`: K-Means pipeline (impute+scale+kmeans), auto/config feature selection, non-mutating `assign_segments`, `profile` with optional churn rate.
+- `segmentation/personas.py` → `PersonaLabeler` + `DEFAULT_PERSONA_NAMES`: value×risk median-split quadrant persona labels.
+- 8 tests (`test_segmentation.py`). Real E2E: 4 coherent segments (High-Value Loyal churn 0.14, Low-Value At-Risk 0.46, etc.).
+- `ruff` clean · `black` formatted · `pytest` **53 passed**.
+
 _Next iteration: append here._

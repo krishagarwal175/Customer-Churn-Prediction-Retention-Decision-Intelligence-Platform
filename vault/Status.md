@@ -10,12 +10,13 @@
 - **FeatureEngineer** — schema-driven, 5 engineered features, verified.
 - **Modeling** — training (LR + XGBoost), evaluation (+recall@precision), calibration, prediction/persistence. Dataset-agnostic, verified on real data.
 - **Explainability** — SHAP global + per-customer, business-readable driver translation. Verified LR + XGB.
+- **Segmentation** — K-Means clustering + persona labelling. Verified on real data (4 coherent segments).
 - Memory vault initialized.
 
 ## Health
-- `ruff check .` clean · `black` formatted · `pytest` **45 passed**.
+- `ruff check .` clean · `black` formatted · `pytest` **53 passed**.
 
 ## Next 🔜
-- Segmentation (clustering/personas), simulation (revenue/sensitivity), recommendations, reporting, Streamlit app. Optional: feature selection, model-selection orchestration script.
+- Simulation (revenue/sensitivity), recommendations, reporting, Streamlit app. Optional: feature selection, model-selection orchestration script.
 
 See [[Open Questions]]
