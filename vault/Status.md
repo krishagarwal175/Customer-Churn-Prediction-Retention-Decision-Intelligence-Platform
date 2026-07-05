@@ -8,12 +8,13 @@
 - **BusinessEDA** — schema-driven refactor complete & verified.
 - `01_business_eda.ipynb` notebook wired end-to-end.
 - **FeatureEngineer** — schema-driven, 5 engineered features, verified.
+- **Modeling** — training (LR + XGBoost), evaluation (+recall@precision), calibration, prediction/persistence. Dataset-agnostic, verified on real data.
 - Memory vault initialized.
 
 ## Health
-- `ruff check .` clean · `black` formatted · `pytest` **28 passed**.
+- `ruff check .` clean · `black` formatted · `pytest` **37 passed**.
 
 ## Next 🔜
-- Feature selection, then model training/eval/calibration/prediction (placeholders exist), explainability, segmentation, simulation, recommendations, reporting, Streamlit app.
+- Explainability (SHAP), segmentation, simulation, recommendations, reporting, Streamlit app. Optional: feature selection, model-selection/persistence orchestration script.
 
 See [[Open Questions]]

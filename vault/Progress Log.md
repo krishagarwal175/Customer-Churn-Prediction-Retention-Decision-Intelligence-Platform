@@ -21,4 +21,13 @@
 - Added `schema.features` config block; wrote 9 real tests (replacing placeholder).
 - Verified: `ruff` clean · `black` formatted · `pytest` **28 passed** · E2E on real data adds all 5 cols, input unmutated.
 
+### 2026-07-05 — Milestone: Modeling (train/eval/calibrate/predict)
+- Implemented `models/training.py` (dtype-inferred preprocessing pipeline + config-driven estimator: logistic_regression baseline, xgboost candidate; `encode_target`).
+- `models/evaluation.py` — standard metrics + primary `recall_at_precision_floor` (floor 0.45).
+- `models/calibration.py` — `calibrate_classifier` (FrozenEstimator + CalibratedClassifierCV, sklearn 1.9 API).
+- `models/prediction.py` — `ChurnPredictor` (proba/threshold, joblib save/load).
+- 9 tests (replacing placeholder). Dataset-agnostic (roles inferred by dtype).
+- Real E2E: LR ROC-AUC 0.833 / XGB 0.853; recall@p≥0.45 = 0.875 / 0.925; calibration Brier 0.159→0.146.
+- Verified: `ruff` clean · `black` formatted · `pytest` **37 passed**.
+
 _Next iteration: append here._
