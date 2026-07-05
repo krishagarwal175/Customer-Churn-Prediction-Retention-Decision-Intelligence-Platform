@@ -58,4 +58,12 @@
 - 10 tests. Real E2E: prioritized top-5 targets with sensible hybrid actions.
 - `ruff` clean · `black` formatted · `pytest` **74 passed**. Full platform pipeline now integrated end-to-end.
 
+### 2026-07-05 — Milestone: Reporting (charts + tables)
+- User-chosen design: both Plotly + Matplotlib, figure objects (no IO), plain DataFrames, all 4 components.
+- `reporting/charts.py`: `churn_overview`, `revenue_at_risk`, `roc_curve`, `precision_recall`, `calibration`, `feature_importance` — each with `backend="plotly"|"matplotlib"`, returns a figure, no side effects.
+- `reporting/tables.py`: `kpi_overview_table`, `model_metrics_table`, `segment_profile_table`, `retention_shortlist_table` — plain DataFrames.
+- 10 tests. Real E2E: all charts (both backends) + tables built from the live model.
+- `ruff` clean · `black` formatted · `pytest` **84 passed**.
+- Last backend layer done. UI (Streamlit) is next — WAIT for user's detailed UI description before building.
+
 _Next iteration: append here._
