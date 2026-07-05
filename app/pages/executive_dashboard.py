@@ -1,2 +1,0 @@
-"""Executive dashboard page placeholder."""
-

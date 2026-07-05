@@ -66,4 +66,11 @@
 - `ruff` clean · `black` formatted · `pytest` **84 passed**.
 - Last backend layer done. UI (Streamlit) is next — WAIT for user's detailed UI description before building.
 
+### 2026-07-05 — Milestone: Streamlit UI (v1)
+- User: build a first UI pass and iterate. Theme locked: Nordic Steel light + Graphite dark (toggle).
+- Built `app/`: `theme.py` (palettes/CSS/plotly styling/toggle), `services.py` (cached pipeline: data, model, segmentation, scoring, simulation, recommendations), components (kpis/charts/tables/filters/customer_profile), 8 views, `streamlit_app.py` (st.navigation). `.streamlit/config.toml`, `.claude/launch.json`.
+- Renamed `app/pages`→`app/views` to stop Streamlit auto-MPA clashing with st.navigation. Fixed unique `url_path`, `st.dataframe` height=None, `use_container_width`→`width`, zero-baseline charts.
+- Verified live: exec dashboard, prediction, revenue simulator render in both light+dark; no errors. Backend `pytest` still **84 passed**.
+- KNOWN ITERATION ITEMS: (1) model uses geographic/reporting cols (Zip Code, Lat/Long) as features → "Zip Code" shows as a churn driver; drop reporting cols from feature set for credibility. (2) st.metric truncates long persona/contract text. (3) dark-mode native-widget polish.
+
 _Next iteration: append here._

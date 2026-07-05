@@ -18,4 +18,9 @@
 - **Why:** Feature layer was a placeholder; needed the schema-declared engineered columns while staying config-driven.
 - **What:** `FeatureEngineer(schema=None)`, `transform(df)` returns new df (non-mutating, computation-only). Features: `tenure_bucket`, `service_count`, `average_monthly_spend` (Total/tenure, zero-tenure → Monthly), `contract_commitment_score` (ordinal), `risk_value_quadrant` (CLTV median × contract-commitment risk). Missing sources skip with a warning. Added additive `schema.features` config.
 
+### D6 — UI: web-based Streamlit, paired theme (2026-07-05)
+- **Why:** Internal analytics platform for analysts/execs — web (zero install, shareable) beats native; Streamlit already scaffolded and integrates with the Python backend.
+- **What:** Minimalist, flat, subtle. **Light = Nordic Steel** (bg #F7F8FA, accent #3E5C76); **Dark = Graphite** (bg #17181A, accent #6FA292), paired with a mode toggle. No glow/gradients/neon. Muted accent-derived chart colors. Full token set recorded in [[Status]].
+- **Pending:** user will provide a detailed UI spec (pages/layout/flow) before any UI code is written.
+
 See [[Progress Log]]

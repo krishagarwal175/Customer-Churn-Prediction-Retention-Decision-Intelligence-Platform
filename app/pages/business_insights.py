@@ -1,2 +1,0 @@
-"""Business insights page placeholder."""
-

@@ -1,2 +1,0 @@
-"""Customer explorer page placeholder."""
-
