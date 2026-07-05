@@ -279,6 +279,7 @@ def main() -> None:
     _write("recommendations.json", recommendations)
     _write("segmentation.json", segmentation_spec)
     _write("model.json", model_spec)
+    _write("catalog.json", config.get("recommendations", {}))
     print("Artifacts built successfully.")
 
 
