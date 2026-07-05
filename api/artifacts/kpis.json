@@ -1,0 +1,15 @@
+{
+  "churn": {
+    "total_customers": 7043,
+    "churned_customers": 1869,
+    "active_customers": 5174,
+    "churn_rate": 0.2653698707936959
+  },
+  "revenue": {
+    "total_revenue": 16056168.7,
+    "average_total_charges": 2283.3004408418656,
+    "average_monthly_charges": 64.76169246059918,
+    "churned_customer_revenue": 2862926.9,
+    "retained_customer_revenue": 13193241.8
+  }
+}

@@ -1,0 +1,810 @@
+[
+  {
+    "rank": 1,
+    "customer_id": "0295-PPHDO",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1728.6,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 2,
+    "customer_id": "3178-FESZO",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1679.1,
+    "top_drivers": [
+      "Monthly Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Review the plan for cost optimization",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 3,
+    "customer_id": "5178-LMXOP",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1678.5,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 4,
+    "customer_id": "9282-IZGQK",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1643.7,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Monthly Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program",
+      "Review the plan for cost optimization"
+    ]
+  },
+  {
+    "rank": 5,
+    "customer_id": "6618-RYATB",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1611.3,
+    "top_drivers": [
+      "Total Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 6,
+    "customer_id": "6894-LFHLY",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1611.3,
+    "top_drivers": [
+      "Total Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 7,
+    "customer_id": "9497-QCMMS",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1600.8,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Total Charges",
+      "Tenure Months"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 8,
+    "customer_id": "0897-FEGMU",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1525.8,
+    "top_drivers": [
+      "Monthly Charges",
+      "contract_commitment_score",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Review the plan for cost optimization"
+    ]
+  },
+  {
+    "rank": 9,
+    "customer_id": "1450-GALXR",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 1.0,
+    "expected_net_benefit": 1495.2,
+    "top_drivers": [
+      "Monthly Charges",
+      "contract_commitment_score",
+      "average_monthly_spend"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Review the plan for cost optimization"
+    ]
+  },
+  {
+    "rank": 10,
+    "customer_id": "9444-JTXHZ",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1456.22,
+    "top_drivers": [
+      "Tenure Months",
+      "Total Charges",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 11,
+    "customer_id": "2506-TNFCO",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1449.88,
+    "top_drivers": [
+      "Total Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 12,
+    "customer_id": "8062-YBDOE",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1423.48,
+    "top_drivers": [
+      "Total Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 13,
+    "customer_id": "3428-XZMAZ",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1411.29,
+    "top_drivers": [
+      "Total Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 14,
+    "customer_id": "8348-HFYIV",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1405.96,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Total Charges",
+      "Tenure Months"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 15,
+    "customer_id": "6688-UZPWD",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1399.62,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Monthly Charges",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Review the plan for cost optimization"
+    ]
+  },
+  {
+    "rank": 16,
+    "customer_id": "4952-YSOGZ",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1371.69,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "average_monthly_spend"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 17,
+    "customer_id": "1761-AEZZR",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1359.76,
+    "top_drivers": [
+      "Total Charges",
+      "contract_commitment_score",
+      "Tenure Months"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 18,
+    "customer_id": "2720-WGKHP",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1353.67,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 19,
+    "customer_id": "9894-EZEWG",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1353.34,
+    "top_drivers": [
+      "Tenure Months",
+      "contract_commitment_score",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 20,
+    "customer_id": "9172-ANCRX",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1351.64,
+    "top_drivers": [
+      "Monthly Charges",
+      "contract_commitment_score",
+      "Tenure Months"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Review the plan for cost optimization",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 21,
+    "customer_id": "7180-PISOG",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1349.86,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 22,
+    "customer_id": "9399-APLBT",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1349.57,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 23,
+    "customer_id": "6653-CBBOM",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1345.56,
+    "top_drivers": [
+      "Tenure Months",
+      "contract_commitment_score",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 24,
+    "customer_id": "6496-SLWHQ",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1344.86,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Multiple Lines = No"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 25,
+    "customer_id": "2868-MZAGQ",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1344.53,
+    "top_drivers": [
+      "Total Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 26,
+    "customer_id": "3027-ZTDHO",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1342.74,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 27,
+    "customer_id": "4951-UKAAQ",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1342.03,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Online Security = No"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program",
+      "Offer a free online-security trial"
+    ]
+  },
+  {
+    "rank": 28,
+    "customer_id": "0637-KVDLV",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1341.09,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 29,
+    "customer_id": "5277-ZLOOR",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1339.2,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "average_monthly_spend"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 30,
+    "customer_id": "4009-ALQFH",
+    "persona": "High-Value Loyal",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1338.26,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Monthly Charges",
+      "average_monthly_spend"
+    ],
+    "recommended_actions": [
+      "Proactive value check-in and upsell review",
+      "Review the plan for cost optimization"
+    ]
+  },
+  {
+    "rank": 31,
+    "customer_id": "6996-KNSML",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1335.19,
+    "top_drivers": [
+      "Tenure Months",
+      "contract_commitment_score",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 32,
+    "customer_id": "5565-FILXA",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1333.78,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Monthly Charges",
+      "average_monthly_spend"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Review the plan for cost optimization"
+    ]
+  },
+  {
+    "rank": 33,
+    "customer_id": "4822-RVYBB",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1332.13,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Monthly Charges",
+      "Tenure Months"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Review the plan for cost optimization",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 34,
+    "customer_id": "2725-KXXWT",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1326.0,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 35,
+    "customer_id": "8473-VUVJN",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1321.68,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 36,
+    "customer_id": "3746-EUBYR",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1321.52,
+    "top_drivers": [
+      "Tenure Months",
+      "contract_commitment_score",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 37,
+    "customer_id": "8779-QRDMV",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1319.15,
+    "top_drivers": [
+      "Tenure Months",
+      "Total Charges",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 38,
+    "customer_id": "4102-OQUPX",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8462,
+    "expected_net_benefit": 1318.13,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 39,
+    "customer_id": "8361-LTMKD",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1316.34,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Online Security = No"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program",
+      "Offer a free online-security trial"
+    ]
+  },
+  {
+    "rank": 40,
+    "customer_id": "8185-UPYBR",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1316.1,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Online Security = No"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program",
+      "Offer a free online-security trial"
+    ]
+  },
+  {
+    "rank": 41,
+    "customer_id": "9514-JDSKI",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1313.74,
+    "top_drivers": [
+      "Tenure Months",
+      "contract_commitment_score",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 42,
+    "customer_id": "0511-JTEOY",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1312.8,
+    "top_drivers": [
+      "Tenure Months",
+      "contract_commitment_score",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 43,
+    "customer_id": "5380-AFSSK",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.8408,
+    "expected_net_benefit": 1310.9,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "average_monthly_spend"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 44,
+    "customer_id": "2865-TCHJW",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1309.03,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Online Security = No"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program",
+      "Offer a free online-security trial"
+    ]
+  },
+  {
+    "rank": 45,
+    "customer_id": "3716-BDVDB",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1305.96,
+    "top_drivers": [
+      "Total Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 46,
+    "customer_id": "9090-SGQXL",
+    "persona": "High-Value Loyal",
+    "churn_probability": 0.7241,
+    "expected_net_benefit": 1305.14,
+    "top_drivers": [
+      "average_monthly_spend",
+      "contract_commitment_score",
+      "CLTV"
+    ],
+    "recommended_actions": [
+      "Proactive value check-in and upsell review"
+    ]
+  },
+  {
+    "rank": 47,
+    "customer_id": "9223-UCPVT",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1298.66,
+    "top_drivers": [
+      "Tenure Months",
+      "contract_commitment_score",
+      "Total Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 48,
+    "customer_id": "1628-BIZYP",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1296.3,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "Monthly Charges"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program",
+      "Review the plan for cost optimization"
+    ]
+  },
+  {
+    "rank": 49,
+    "customer_id": "6416-TVAIH",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1296.06,
+    "top_drivers": [
+      "Total Charges",
+      "Tenure Months",
+      "contract_commitment_score"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  },
+  {
+    "rank": 50,
+    "customer_id": "3319-DWOEP",
+    "persona": "Low-Value At-Risk",
+    "churn_probability": 0.7857,
+    "expected_net_benefit": 1295.36,
+    "top_drivers": [
+      "contract_commitment_score",
+      "Tenure Months",
+      "average_monthly_spend"
+    ],
+    "recommended_actions": [
+      "Automated retention email with incentive",
+      "Enroll in an early-tenure onboarding program"
+    ]
+  }
+]

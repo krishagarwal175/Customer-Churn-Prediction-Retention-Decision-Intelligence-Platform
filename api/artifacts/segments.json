@@ -1,0 +1,38 @@
+[
+  {
+    "segment": 0,
+    "customer_count": 1955,
+    "Tenure Months": 57.74782608695652,
+    "Monthly Charges": 93.22695652173914,
+    "CLTV": 5144.497698209719,
+    "churn_rate": 0.1672634271099744,
+    "persona": "High-Value Loyal"
+  },
+  {
+    "segment": 1,
+    "customer_count": 1878,
+    "Tenure Months": 10.44675186368477,
+    "Monthly Charges": 55.849014909478164,
+    "CLTV": 4961.172523961662,
+    "churn_rate": 0.3865814696485623,
+    "persona": "Low-Value At-Risk"
+  },
+  {
+    "segment": 2,
+    "customer_count": 1018,
+    "Tenure Months": 55.27111984282908,
+    "Monthly Charges": 32.096660117878194,
+    "CLTV": 5083.616895874263,
+    "churn_rate": 0.03831041257367387,
+    "persona": "Low-Value Stable"
+  },
+  {
+    "segment": 3,
+    "customer_count": 2192,
+    "Tenure Months": 17.886861313868614,
+    "Monthly Charges": 62.18022354014598,
+    "CLTV": 2938.6797445255474,
+    "churn_rate": 0.354470802919708,
+    "persona": "High-Value At-Risk"
+  }
+]

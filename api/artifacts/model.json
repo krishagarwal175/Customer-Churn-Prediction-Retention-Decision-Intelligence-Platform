@@ -1,0 +1,297 @@
+{
+  "numeric_features": [
+    "Tenure Months",
+    "Monthly Charges",
+    "Total Charges",
+    "CLTV",
+    "service_count",
+    "average_monthly_spend",
+    "contract_commitment_score"
+  ],
+  "categorical_features": [
+    "Gender",
+    "Senior Citizen",
+    "Partner",
+    "Dependents",
+    "Phone Service",
+    "Multiple Lines",
+    "Internet Service",
+    "Online Security",
+    "Online Backup",
+    "Device Protection",
+    "Tech Support",
+    "Streaming TV",
+    "Streaming Movies",
+    "Contract",
+    "Paperless Billing",
+    "Payment Method",
+    "tenure_bucket",
+    "risk_value_quadrant"
+  ],
+  "numeric_impute": {
+    "Tenure Months": 29.0,
+    "Monthly Charges": 70.57499999999999,
+    "Total Charges": 1389.2,
+    "CLTV": 4525.0,
+    "service_count": 4.0,
+    "average_monthly_spend": 70.775,
+    "contract_commitment_score": 0.0
+  },
+  "numeric_mean": {
+    "Tenure Months": 32.47119675456389,
+    "Monthly Charges": 64.95008113590264,
+    "Total Charges": 2303.7700608519267,
+    "CLTV": 4407.047667342799,
+    "service_count": 4.1726166328600405,
+    "average_monthly_spend": 64.947223705001,
+    "contract_commitment_score": 0.6933062880324543
+  },
+  "numeric_scale": {
+    "Tenure Months": 24.643850205047777,
+    "Monthly Charges": 30.240606272723696,
+    "Total Charges": 2290.9497027998714,
+    "CLTV": 1178.7706749909826,
+    "service_count": 2.3297225476815218,
+    "average_monthly_spend": 30.334020236267715,
+    "contract_commitment_score": 0.8343875950199273
+  },
+  "categorical_impute": {
+    "Gender": "Male",
+    "Senior Citizen": "No",
+    "Partner": "No",
+    "Dependents": "No",
+    "Phone Service": "Yes",
+    "Multiple Lines": "No",
+    "Internet Service": "Fiber optic",
+    "Online Security": "No",
+    "Online Backup": "No",
+    "Device Protection": "No",
+    "Tech Support": "No",
+    "Streaming TV": "Yes",
+    "Streaming Movies": "No",
+    "Contract": "Month-to-month",
+    "Paperless Billing": "Yes",
+    "Payment Method": "Electronic check",
+    "tenure_bucket": "0-12",
+    "risk_value_quadrant": "Low Value / High Risk"
+  },
+  "categorical_categories": {
+    "Gender": [
+      "Female",
+      "Male"
+    ],
+    "Senior Citizen": [
+      "No",
+      "Yes"
+    ],
+    "Partner": [
+      "No",
+      "Yes"
+    ],
+    "Dependents": [
+      "No",
+      "Yes"
+    ],
+    "Phone Service": [
+      "No",
+      "Yes"
+    ],
+    "Multiple Lines": [
+      "No",
+      "No phone service",
+      "Yes"
+    ],
+    "Internet Service": [
+      "DSL",
+      "Fiber optic",
+      "No"
+    ],
+    "Online Security": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Online Backup": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Device Protection": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Tech Support": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Streaming TV": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Streaming Movies": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Contract": [
+      "Month-to-month",
+      "One year",
+      "Two year"
+    ],
+    "Paperless Billing": [
+      "No",
+      "Yes"
+    ],
+    "Payment Method": [
+      "Bank transfer (automatic)",
+      "Credit card (automatic)",
+      "Electronic check",
+      "Mailed check"
+    ],
+    "tenure_bucket": [
+      "0-12",
+      "13-24",
+      "25-48",
+      "49-60",
+      "61-72"
+    ],
+    "risk_value_quadrant": [
+      "High Value / High Risk",
+      "High Value / Low Risk",
+      "Low Value / High Risk",
+      "Low Value / Low Risk"
+    ]
+  },
+  "coef": {
+    "numeric__Tenure Months": -1.0775896701483005,
+    "numeric__Monthly Charges": -0.3893711137728649,
+    "numeric__Total Charges": 0.29714098720470616,
+    "numeric__CLTV": 0.011505165098595609,
+    "numeric__service_count": 0.20035523964952992,
+    "numeric__average_monthly_spend": 0.04481038571237354,
+    "numeric__contract_commitment_score": -0.48890338010649004,
+    "categorical__Gender_Female": -0.11375343447835481,
+    "categorical__Gender_Male": -0.0679466272458525,
+    "categorical__Senior Citizen_No": -0.10520969328802166,
+    "categorical__Senior Citizen_Yes": -0.07649036843618177,
+    "categorical__Partner_No": -0.21433415572182268,
+    "categorical__Partner_Yes": 0.03263409399760304,
+    "categorical__Dependents_No": 0.7284944201264961,
+    "categorical__Dependents_Yes": -0.9101944818506849,
+    "categorical__Phone Service_No": -0.038575975707438544,
+    "categorical__Phone Service_Yes": -0.14312408601675422,
+    "categorical__Multiple Lines_No": -0.1988438145754799,
+    "categorical__Multiple Lines_No phone service": -0.038575975707438544,
+    "categorical__Multiple Lines_Yes": 0.05571972855870557,
+    "categorical__Internet Service_DSL": -0.4717885807954544,
+    "categorical__Internet Service_Fiber optic": 0.47542568346744224,
+    "categorical__Internet Service_No": -0.18533716439617887,
+    "categorical__Online Security_No": 0.1991481578835765,
+    "categorical__Online Security_No internet service": -0.18533716439617887,
+    "categorical__Online Security_Yes": -0.19551105521160728,
+    "categorical__Online Backup_No": 0.08900369216408377,
+    "categorical__Online Backup_No internet service": -0.18533716439617887,
+    "categorical__Online Backup_Yes": -0.08536658949211841,
+    "categorical__Device Protection_No": 0.0374512465521154,
+    "categorical__Device Protection_No internet service": -0.18533716439617887,
+    "categorical__Device Protection_Yes": -0.033814143880141014,
+    "categorical__Tech Support_No": 0.17185616371238455,
+    "categorical__Tech Support_No internet service": -0.18533716439617887,
+    "categorical__Tech Support_Yes": -0.16821906104040185,
+    "categorical__Streaming TV_No": -0.10507216010053821,
+    "categorical__Streaming TV_No internet service": -0.18533716439617887,
+    "categorical__Streaming TV_Yes": 0.10870926277253372,
+    "categorical__Streaming Movies_No": -0.1629391585814074,
+    "categorical__Streaming Movies_No internet service": -0.18533716439617887,
+    "categorical__Streaming Movies_Yes": 0.16657626125337024,
+    "categorical__Contract_Month-to-month": 0.13554981299341934,
+    "categorical__Contract_One year": -0.10059103858181205,
+    "categorical__Contract_Two year": -0.216658836135812,
+    "categorical__Paperless Billing_No": -0.28003853824369396,
+    "categorical__Paperless Billing_Yes": 0.09833847651947421,
+    "categorical__Payment Method_Bank transfer (automatic)": -0.14541272551311227,
+    "categorical__Payment Method_Credit card (automatic)": -0.14630034383442092,
+    "categorical__Payment Method_Electronic check": 0.23173942353190957,
+    "categorical__Payment Method_Mailed check": -0.12172641590856938,
+    "categorical__tenure_bucket_0-12": 0.027063472808705538,
+    "categorical__tenure_bucket_13-24": -0.4341265625450267,
+    "categorical__tenure_bucket_25-48": -0.24231050436432697,
+    "categorical__tenure_bucket_49-60": 0.18079632031900575,
+    "categorical__tenure_bucket_61-72": 0.28687721205743516,
+    "categorical__risk_value_quadrant_High Value / High Risk": -0.034402144707523154,
+    "categorical__risk_value_quadrant_High Value / Low Risk": 0.1353506718556854,
+    "categorical__risk_value_quadrant_Low Value / High Risk": 0.0693609191191354,
+    "categorical__risk_value_quadrant_Low Value / Low Risk": -0.3520095079915013
+  },
+  "intercept": -0.3898485197718822,
+  "feature_engineering": {
+    "tenure_column": "Tenure Months",
+    "contract_column": "Contract",
+    "monthly_charges_column": "Monthly Charges",
+    "total_charges_column": "Total Charges",
+    "cltv_column": "CLTV",
+    "service_columns": [
+      "Phone Service",
+      "Multiple Lines",
+      "Internet Service",
+      "Online Security",
+      "Online Backup",
+      "Device Protection",
+      "Tech Support",
+      "Streaming TV",
+      "Streaming Movies"
+    ],
+    "non_service_values": [
+      "No",
+      "No phone service",
+      "No internet service"
+    ],
+    "contract_commitment_scores": {
+      "Month-to-month": 0,
+      "One year": 1,
+      "Two year": 2
+    },
+    "tenure_bucket_edges": [
+      -1,
+      12,
+      24,
+      48,
+      60,
+      72
+    ],
+    "tenure_bucket_labels": [
+      "0-12",
+      "13-24",
+      "25-48",
+      "49-60",
+      "61-72"
+    ],
+    "cltv_median": 4527.0,
+    "max_commitment": 2
+  },
+  "input_columns": [
+    "Gender",
+    "Senior Citizen",
+    "Partner",
+    "Dependents",
+    "Tenure Months",
+    "Phone Service",
+    "Multiple Lines",
+    "Internet Service",
+    "Online Security",
+    "Online Backup",
+    "Device Protection",
+    "Tech Support",
+    "Streaming TV",
+    "Streaming Movies",
+    "Contract",
+    "Paperless Billing",
+    "Payment Method",
+    "Monthly Charges",
+    "Total Charges",
+    "CLTV"
+  ]
+}

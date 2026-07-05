@@ -1,0 +1,62 @@
+[
+  {
+    "feature": "contract_commitment_score",
+    "importance": 0.83338
+  },
+  {
+    "feature": "Dependents = No",
+    "importance": 0.51639
+  },
+  {
+    "feature": "Tenure Months",
+    "importance": 0.43721
+  },
+  {
+    "feature": "Online Security = No",
+    "importance": 0.22898
+  },
+  {
+    "feature": "Monthly Charges",
+    "importance": 0.22246
+  },
+  {
+    "feature": "Total Charges",
+    "importance": 0.22093
+  },
+  {
+    "feature": "average_monthly_spend",
+    "importance": 0.17817
+  },
+  {
+    "feature": "Tech Support = No",
+    "importance": 0.1718
+  },
+  {
+    "feature": "CLTV",
+    "importance": 0.15093
+  },
+  {
+    "feature": "Payment Method = Electronic check",
+    "importance": 0.14562
+  },
+  {
+    "feature": "Internet Service = Fiber optic",
+    "importance": 0.14293
+  },
+  {
+    "feature": "Paperless Billing = No",
+    "importance": 0.13682
+  },
+  {
+    "feature": "Multiple Lines = No",
+    "importance": 0.09443
+  },
+  {
+    "feature": "Partner = No",
+    "importance": 0.0926
+  },
+  {
+    "feature": "Contract = Month-to-month",
+    "importance": 0.07605
+  }
+]
