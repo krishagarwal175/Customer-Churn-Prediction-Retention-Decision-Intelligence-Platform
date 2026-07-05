@@ -3,6 +3,16 @@ name = "customer-churn-decision-intelligence"
 version = "0.1.0"
 description = "Decision intelligence platform scaffold for customer churn prediction and retention analytics."
 requires-python = ">=3.10"
+# Slim runtime dependencies for the Vercel serverless function. Vercel's Python
+# builder installs from this list; heavy analytics libraries stay offline (see
+# requirements-dev.txt) and never ship to the runtime.
+dependencies = [
+    "fastapi>=0.110",
+    "pydantic>=2.6",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "jinja2>=3.1",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

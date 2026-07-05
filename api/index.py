@@ -7,15 +7,25 @@ artifacts and a NumPy model are loaded here.
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+# Ensure the project root is importable when Vercel loads this function.
+_ROOT = Path(__file__).resolve().parent.parent
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
 
-from api import data, predictor
-from api.schemas import CampaignSummary, CustomerInput, PredictionResponse
+from fastapi import FastAPI, HTTPException, Query, Request  # noqa: E402
+from fastapi.responses import HTMLResponse  # noqa: E402
+from fastapi.templating import Jinja2Templates  # noqa: E402
+
+from api import data, predictor  # noqa: E402
+from api.schemas import (  # noqa: E402
+    CampaignSummary,
+    CustomerInput,
+    PredictionResponse,
+)
 
 _templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 
