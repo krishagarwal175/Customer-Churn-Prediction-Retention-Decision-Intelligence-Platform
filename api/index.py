@@ -7,12 +7,17 @@ artifacts and a NumPy model are loaded here.
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 
 from api import data, predictor
 from api.schemas import CampaignSummary, CustomerInput, PredictionResponse
+
+_templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 
 app = FastAPI(
     title="Customer Churn Decision Intelligence API",
@@ -22,6 +27,21 @@ app = FastAPI(
     ),
     version="0.1.0",
 )
+
+
+@app.get("/", response_class=HTMLResponse, tags=["system"])
+def home(request: Request) -> HTMLResponse:
+    """Minimalist landing page with KPIs, shortlist, and live scoring."""
+    return _templates.TemplateResponse(
+        request,
+        "index.html",
+        {
+            "kpis": data.kpis(),
+            "metrics": data.metrics(),
+            "drivers": data.drivers()[:6],
+            "recommendations": data.recommendations(8),
+        },
+    )
 
 
 @app.get("/api/health", tags=["system"])
