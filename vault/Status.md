@@ -9,12 +9,13 @@
 - `01_business_eda.ipynb` notebook wired end-to-end.
 - **FeatureEngineer** — schema-driven, 5 engineered features, verified.
 - **Modeling** — training (LR + XGBoost), evaluation (+recall@precision), calibration, prediction/persistence. Dataset-agnostic, verified on real data.
+- **Explainability** — SHAP global + per-customer, business-readable driver translation. Verified LR + XGB.
 - Memory vault initialized.
 
 ## Health
-- `ruff check .` clean · `black` formatted · `pytest` **37 passed**.
+- `ruff check .` clean · `black` formatted · `pytest` **45 passed**.
 
 ## Next 🔜
-- Explainability (SHAP), segmentation, simulation, recommendations, reporting, Streamlit app. Optional: feature selection, model-selection/persistence orchestration script.
+- Segmentation (clustering/personas), simulation (revenue/sensitivity), recommendations, reporting, Streamlit app. Optional: feature selection, model-selection orchestration script.
 
 See [[Open Questions]]

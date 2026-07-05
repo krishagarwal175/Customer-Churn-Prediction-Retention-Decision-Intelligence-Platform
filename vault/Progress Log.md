@@ -30,4 +30,10 @@
 - Real E2E: LR ROC-AUC 0.833 / XGB 0.853; recall@p≥0.45 = 0.875 / 0.925; calibration Brier 0.159→0.146.
 - Verified: `ruff` clean · `black` formatted · `pytest` **37 passed**.
 
+### 2026-07-05 — Milestone: Explainability (SHAP)
+- `explainability/shap_explainer.py` → `ChurnExplainer`: SHAP over a fitted pipeline; `global_importance` + `explain_customer`. TreeExplainer for tree models, masker-based fallback for linear (sklearn/shap 0.52).
+- `explainability/business_translator.py` → `BusinessTranslator` + `humanize_feature`: turns transformed feature names into readable, directional churn drivers (categorical-only Col=Value split).
+- 8 tests (new `test_explainability.py`). Verified both LR + XGB paths on real data; sensible top drivers (tenure, contract commitment, dependents).
+- `ruff` clean · `black` formatted · `pytest` **45 passed**.
+
 _Next iteration: append here._
