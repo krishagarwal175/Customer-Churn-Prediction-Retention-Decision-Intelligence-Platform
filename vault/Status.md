@@ -11,12 +11,17 @@
 - **Modeling** — training (LR + XGBoost), evaluation (+recall@precision), calibration, prediction/persistence. Dataset-agnostic, verified on real data.
 - **Explainability** — SHAP global + per-customer, business-readable driver translation. Verified LR + XGB.
 - **Segmentation** — K-Means clustering + persona labelling. Verified on real data (4 coherent segments).
+- **Simulation** — expected-value revenue targeting (segment-specific uplift/cost) + full-grid sensitivity. Verified on real data (ROI 4.0).
 - Memory vault initialized.
 
 ## Health
-- `ruff check .` clean · `black` formatted · `pytest` **53 passed**.
+- `ruff check .` clean · `black` formatted · `pytest` **64 passed**.
+
+## Design decisions (user-chosen)
+- Modeling stays LR + XGBoost (NN/transformer deferred to a dedicated step).
+- Simulation: expected-value + segment economics + full-grid sensitivity.
 
 ## Next 🔜
-- Simulation (revenue/sensitivity), recommendations, reporting, Streamlit app. Optional: feature selection, model-selection orchestration script.
+- Recommendations, reporting, Streamlit app. Optional: feature selection, model-selection orchestration script.
 
 See [[Open Questions]]

@@ -42,4 +42,12 @@
 - 8 tests (`test_segmentation.py`). Real E2E: 4 coherent segments (High-Value Loyal churn 0.14, Low-Value At-Risk 0.46, etc.).
 - `ruff` clean · `black` formatted · `pytest` **53 passed**.
 
+### 2026-07-05 — Milestone: Simulation (revenue + sensitivity)
+- User-chosen design: expected-value targeting, segment-specific uplift/cost, full-grid sensitivity, keep LR+XGBoost.
+- `simulation/revenue.py` → `RevenueSimulator` + `RetentionEconomicsConfig`: per-customer expected saved revenue / net benefit / target flag; per-segment uplift+cost with global defaults; `campaign_summary` (ROI).
+- Added `uplift_scale`/`cost_scale` global multipliers so grid sensitivity moves segment-specific economics (real-run exposed that sweeping the global default did nothing when segment overrides cover all rows).
+- `simulation/sensitivity.py` → `SensitivityAnalyzer.run_grid` (full grid via dataclasses.replace over config fields).
+- 11 tests. Real E2E: ROI 4.0, ~$1.14M expected net benefit on 4817 targeted customers; grid responds to scale sweeps.
+- `ruff` clean · `black` formatted · `pytest` **64 passed**.
+
 _Next iteration: append here._
