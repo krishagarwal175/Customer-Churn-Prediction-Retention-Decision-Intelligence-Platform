@@ -73,4 +73,14 @@
 - Verified live: exec dashboard, prediction, revenue simulator render in both light+dark; no errors. Backend `pytest` still **84 passed**.
 - KNOWN ITERATION ITEMS: (1) model uses geographic/reporting cols (Zip Code, Lat/Long) as features → "Zip Code" shows as a churn driver; drop reporting cols from feature set for credibility. (2) st.metric truncates long persona/contract text. (3) dark-mode native-widget polish.
 
+### 2026-07-05 — Pivot: FastAPI → Vercel (Streamlit removed)
+- User scrapped Streamlit; new target = FastAPI on Vercel. Also declined a fake-commit bot (deceptive) — see [[Decisions]].
+- Design (user-chosen): precompute-and-serve + live `/predict` for new customers; REST API + minimal HTML page.
+- Removed `app/`, `.streamlit/`. Split deps: slim runtime `requirements.txt` (fastapi/pydantic/numpy/pandas/jinja2) vs heavy offline `requirements-dev.txt`.
+- `scripts/build_artifacts.py`: offline builder → slim JSON artifacts (kpis, metrics, customers, segments, drivers, recommendations, segmentation, catalog) + NumPy-only `model.json`. Dropped geographic/reporting cols from the model (fixes ZIP-as-driver; ROC-AUC held 0.85).
+- `api/`: `data.py` (artifact loader + pure-python simulation), `predictor.py` (NumPy-only live scoring: FE + logistic + drivers + persona + hybrid recs), `schemas.py`, `index.py` (endpoints + themed HTML landing page), `templates/index.html`.
+- `vercel.json` rewrites; `.claude/launch.json` uvicorn.
+- Verified live in browser: landing page + live-score form work (86.9% high-risk demo). `ruff`/`black` clean, `pytest` **95 passed** (84 backend + 11 API).
+- REMAINING: user connects repo to Vercel to deploy (needs their Vercel account); heavy libs never ship to Vercel.
+
 _Next iteration: append here._

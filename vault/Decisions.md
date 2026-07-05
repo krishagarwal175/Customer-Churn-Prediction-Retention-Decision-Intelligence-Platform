@@ -23,4 +23,11 @@
 - **What:** Minimalist, flat, subtle. **Light = Nordic Steel** (bg #F7F8FA, accent #3E5C76); **Dark = Graphite** (bg #17181A, accent #6FA292), paired with a mode toggle. No glow/gradients/neon. Muted accent-derived chart colors. Full token set recorded in [[Status]].
 - **Pending:** user will provide a detailed UI spec (pages/layout/flow) before any UI code is written.
 
+### D7 — Pivot to FastAPI on Vercel (2026-07-05)
+- **Why:** User dropped Streamlit for a FastAPI service on Vercel.
+- **What:** Vercel serverless (~250MB, cold starts) can't run xgboost/shap/live-training. So: train offline (`scripts/build_artifacts.py`), commit slim JSON artifacts + a NumPy-only logistic model, and serve via FastAPI. Live `/predict` reproduces the pipeline in pure NumPy. Heavy libs stay in `requirements-dev.txt`; runtime `requirements.txt` is slim. Dropped geo/reporting columns from the model.
+
+### D8 — Declined fake-commit bot (2026-07-05)
+- User asked for a scheduler that commits false/empty changes every 7-10h to fake GitHub activity. Declined — deceptive contribution-graph farming. Offered a legitimate scheduled real-work-only alternative instead.
+
 See [[Progress Log]]
