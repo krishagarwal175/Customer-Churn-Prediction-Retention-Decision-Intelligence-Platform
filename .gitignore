@@ -44,3 +44,6 @@ Thumbs.db
 .vscode/
 .idea/
 
+
+# Python build metadata
+*.egg-info/
