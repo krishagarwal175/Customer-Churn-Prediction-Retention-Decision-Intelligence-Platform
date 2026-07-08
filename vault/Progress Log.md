@@ -90,4 +90,10 @@
 - Verified in browser: all sections populate, simulator live (ROI 6.4×), live scoring 87% high-risk. `pytest` **95 passed**.
 - Auto-deploys to Vercel on push (churn-decision-intelligence). NOTE: still behind Vercel deployment protection (SSO) until user disables it.
 
+### 2026-07-09 — Brutalist editorial redesign + deploy
+- Rebuilt `api/templates/index.html` per julianejeske-inspired brief: Syne/Space Grotesk/Space Mono, near-black charcoal + acid-green (#C7F94E) accent + red (#FF4A34) risk, 1px dividers, bracketed `[01]`/slash labels, massive hero + live risk simulator, scroll marquee, numbered process steps, inverse-hover, cubic-bezier(.16,1,.3,1) reveals. API wiring retained.
+- Verified in browser (hero sim 87%, all sections, live scoring). `pytest` API 11 passed. Deployed to Vercel prod.
+- Earlier: disabled Vercel deployment protection (ssoProtection→None) via API so the site + /api/predict are public. Gave user hi/lo test profiles.
+- ⚠️ DEPLOY GOTCHA: the clean alias `churn-decision-intelligence.vercel.app` is a MANUAL alias — `vercel --prod` does NOT auto-repoint it. After every prod deploy run: `vercel alias set <new-deployment-url> churn-decision-intelligence.vercel.app`.
+
 _Next iteration: append here._
