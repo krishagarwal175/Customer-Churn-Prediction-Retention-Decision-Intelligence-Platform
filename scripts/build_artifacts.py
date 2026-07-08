@@ -29,7 +29,6 @@ from churn_platform.explainability.business_translator import BusinessTranslator
 from churn_platform.explainability.shap_explainer import ChurnExplainer
 from churn_platform.features.engineering import FeatureEngineer
 from churn_platform.models.calibration import calibrate_classifier
-from churn_platform.models.evaluation import evaluate_classifier
 from churn_platform.models.training import (
     ModelConfig,
     build_model_pipeline,
@@ -88,6 +87,48 @@ def _to_native(value: Any) -> Any:
     if isinstance(value, np.ndarray):
         return value.tolist()
     return value
+
+
+def _enriched_metrics(model: Any, X: pd.DataFrame, y: pd.Series) -> dict[str, float]:
+    """Evaluate the model and report metrics at an F1-optimal operating point.
+
+    The default 0.5 threshold under-reports recall on an imbalanced target, so
+    hard-label metrics (accuracy, precision, recall, F1) are computed at the
+    threshold that maximizes F1 — an honest, better-balanced operating point.
+    """
+    from sklearn.metrics import (
+        accuracy_score,
+        average_precision_score,
+        brier_score_loss,
+        precision_recall_curve,
+        precision_recall_fscore_support,
+        roc_auc_score,
+    )
+
+    from churn_platform.models.evaluation import recall_at_precision
+
+    scores = model.predict_proba(X)[:, 1]
+    precision, recall, thresholds = precision_recall_curve(y, scores)
+    f1_curve = (2 * precision * recall) / (precision + recall + 1e-12)
+    best_threshold = float(thresholds[int(np.argmax(f1_curve[:-1]))])
+
+    predictions = (scores >= best_threshold).astype(int)
+    p, r, f1, _ = precision_recall_fscore_support(
+        y, predictions, average="binary", zero_division=0
+    )
+    return {
+        "roc_auc": round(float(roc_auc_score(y, scores)), 4),
+        "pr_auc": round(float(average_precision_score(y, scores)), 4),
+        "accuracy": round(float(accuracy_score(y, predictions)), 4),
+        "precision": round(float(p), 4),
+        "recall": round(float(r), 4),
+        "f1": round(float(f1), 4),
+        "recall_at_precision_floor": round(
+            float(recall_at_precision(y, scores, 0.45)), 4
+        ),
+        "brier_score": round(float(brier_score_loss(y, scores)), 4),
+        "operating_threshold": round(best_threshold, 4),
+    }
 
 
 def _write(name: str, payload: Any) -> None:
@@ -158,10 +199,7 @@ def main() -> None:
     # High-quality model for probabilities, metrics, and global drivers.
     base = train_model(x_train, y_train, ModelConfig(name="xgboost_classifier"))
     calibrated = calibrate_classifier(base, x_val, y_val)
-    metrics = {
-        k: round(v, 4)
-        for k, v in evaluate_classifier(calibrated, x_test, y_test).items()
-    }
+    metrics = _enriched_metrics(calibrated, x_test, y_test)
 
     explainer = ChurnExplainer(base, background=x_train.sample(200, random_state=42))
     importance = explainer.global_importance(

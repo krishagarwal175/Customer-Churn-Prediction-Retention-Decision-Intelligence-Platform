@@ -21,7 +21,7 @@ def test_home_page_renders(client: TestClient) -> None:
     response = client.get("/")
     assert response.status_code == 200
     assert "Churn Decision Intelligence" in response.text
-    assert "predict-form" in response.text
+    assert 'id="pform"' in response.text
 
 
 def test_kpis_and_metrics(client: TestClient) -> None:

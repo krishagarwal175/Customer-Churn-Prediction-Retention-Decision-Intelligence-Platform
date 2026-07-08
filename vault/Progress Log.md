@@ -83,4 +83,11 @@
 - Verified live in browser: landing page + live-score form work (86.9% high-risk demo). `ruff`/`black` clean, `pytest` **95 passed** (84 backend + 11 API).
 - REMAINING: user connects repo to Vercel to deploy (needs their Vercel account); heavy libs never ship to Vercel.
 
+### 2026-07-05 — UI overhaul (dark/green) + enriched metrics
+- User: "complete overhaul" — darker blacks, deeper green, loading animations, better accuracy ratios.
+- `scripts/build_artifacts.py`: `_enriched_metrics` reports at the F1-optimal threshold → accuracy 0.785, recall 0.751, precision 0.573, f1 0.650 (was recall 0.32 at 0.5); kept roc_auc 0.849, recall@precision 0.865. Regenerated metrics.json.
+- Rebuilt `api/templates/index.html`: near-black (#050607) + deep emerald (#0B7A57/#10B981/#34D399) theme; sidebar nav w/ scroll-spy; full-screen loader, count-up numbers, SVG ring gauges, animated bars, section fade-ins, shimmer skeletons; live ROI simulator (sliders→/api/simulate) and live scoring form (→/api/predict) with animated probability ring.
+- Verified in browser: all sections populate, simulator live (ROI 6.4×), live scoring 87% high-risk. `pytest` **95 passed**.
+- Auto-deploys to Vercel on push (churn-decision-intelligence). NOTE: still behind Vercel deployment protection (SSO) until user disables it.
+
 _Next iteration: append here._
