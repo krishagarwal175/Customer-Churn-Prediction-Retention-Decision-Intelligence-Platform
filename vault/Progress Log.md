@@ -96,4 +96,10 @@
 - Earlier: disabled Vercel deployment protection (ssoProtection→None) via API so the site + /api/predict are public. Gave user hi/lo test profiles.
 - ⚠️ DEPLOY GOTCHA: the clean alias `churn-decision-intelligence.vercel.app` is a MANUAL alias — `vercel --prod` does NOT auto-repoint it. After every prod deploy run: `vercel alias set <new-deployment-url> churn-decision-intelligence.vercel.app`.
 
+### 2026-07-09 — Footer credit, field tooltips, responsive fixes
+- Footer: "built by Krish Agarwal" → github.com/krishagarwal175 + repo link.
+- Live-scoring: info (ⓘ) icon per field with a tooltip explaining the parameter + churn effect. Hover (desktop) + click/tap toggle (`.info.open`, JS) for touch; `:focus` also wired. NOTE: preview Chrome can't test `:hover`/`:focus` (window lacks OS focus → `:focus` won't match even when activeElement) — verified via the click toggle instead.
+- Responsive: `.tscroll` wrapper on the table (scrolls in-container), viewport-safe tooltip placement (nth-child edge flips), small-screen type/padding block. No horizontal overflow at 375px.
+- Deployed + re-pointed alias per the gotcha. Verified live.
+
 _Next iteration: append here._
